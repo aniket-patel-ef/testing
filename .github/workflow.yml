@@ -1,0 +1,20 @@
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "build and publish"
+      
+
+  deploy-dev:
+    runs-on: 'ubuntu-latest'
+    environment: 'dev'
+    needs: build-and-publish
+    steps:
+      - run: echo "dev deploy"
+
+  deploy-prod:
+    runs-on: 'ubuntu-latest'
+    environment: 'prod'
+    needs: [build-and-publish, deploy-dev]
+    steps:
+     - run: echo "prod deploy"
